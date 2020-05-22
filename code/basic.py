@@ -71,6 +71,19 @@ def turn(l_speed, r_speed, duration, l_m, r_m):
     time.sleep(duration)
 
 
+# 半径为1米的转向
+def advanced_turn(direction, duration, l_m, r_m):
+    # 外侧轮转速
+    faster_speed = 94.102
+    # 内侧轮转速
+    slower_speed = 80.0
+    # 0为向左，1为向右
+    if direction == 0:
+        turn(l_speed=slower_speed, r_speed=faster_speed, duration=duration, l_m=l_m, r_m=r_m)
+    else:
+        turn(l_speed=faster_speed, r_speed=slower_speed, duration=duration, l_m=l_m, r_m=r_m)
+
+
 if __name__ == '__main__':
     init()
     L_Motor = GPIO.PWM(PWMA, 100)
