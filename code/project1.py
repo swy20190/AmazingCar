@@ -35,4 +35,8 @@ if __name__ == '__main__':
     basic.brake(2.0, L_Motor, R_Motor)
     # turn right by 135 degree
     basic.advanced_turn(direction=1, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
+    # 4nd brake
+    basic.brake(2.0, L_Motor, R_Motor)
+    # clear
+    GPIO.cleanup()
 
