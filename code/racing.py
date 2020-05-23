@@ -44,7 +44,7 @@ def forward(speed, duration, l_m, r_m):
 def short_left(l_m, r_m):
     l_m.ChangeDutyCycle(0)
     r_m.ChangeDutyCycle(100)
-    time.sleep(0.1)
+    time.sleep(0.14)
 
 
 def backward(speed, duration, l_m, r_m):
