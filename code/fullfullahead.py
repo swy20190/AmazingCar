@@ -16,8 +16,10 @@ BIN2 = 24
 def init():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
+    GPIO.setup(PWMA, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)
@@ -54,8 +56,8 @@ if __name__ == '__main__':
     L_Motor.start(0)
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
-    # 全速前进5秒
-    forward(5, 100.0, L_Motor, R_Motor)
+    # 全速前进1秒
+    forward(1, 100.0, L_Motor, R_Motor)
     # 停车3秒
     brake(3.0, L_Motor, R_Motor)
     GPIO.cleanup()

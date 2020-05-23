@@ -80,7 +80,7 @@ def advanced_turn(direction, duration, l_m, r_m, forward):
         turn(l_speed=faster_speed, r_speed=slower_speed, duration=duration, l_m=l_m, r_m=r_m, forward=forward)
 
 
-def pivot_turn(direction, f_b, l_m, r_m, forward):
+def pivot_turn(direction, l_m, r_m, forward):
     pivot_time = 1.0  # 具体时间待测
     faster_speed = 80
     slower_speed = 0.0
@@ -91,6 +91,10 @@ def pivot_turn(direction, f_b, l_m, r_m, forward):
 
 
 if __name__ == '__main__':
-
-
-
+    init()
+    L_Motor = GPIO.PWM(PWMA, 100)
+    L_Motor.start(0)
+    R_Motor = GPIO.PWM(PWMB, 100)
+    R_Motor.start(0)
+    # 首先原地右转90度
+    pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=True)

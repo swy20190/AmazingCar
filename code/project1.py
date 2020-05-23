@@ -16,8 +16,10 @@ BIN2 = 24
 def init():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
+    GPIO.setup(PWMB, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)
@@ -105,7 +107,7 @@ if __name__ == '__main__':
     brake(2.0, L_Motor, R_Motor)
     # turn left by 135 degree
     # speed of car
-    turning_time = 1.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
+    turning_time = 0.5  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
     advanced_turn(direction=0, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
     # 3rd brake
     brake(2.0, L_Motor, R_Motor)
