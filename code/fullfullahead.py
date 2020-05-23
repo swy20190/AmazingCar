@@ -54,8 +54,8 @@ if __name__ == '__main__':
     L_Motor.start(0)
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
-    # 全速前进20秒
-    forward(20, 100.0, L_Motor, R_Motor)
+    # 全速前进5秒
+    forward(5, 100.0, L_Motor, R_Motor)
     # 停车3秒
     brake(3.0, L_Motor, R_Motor)
     GPIO.cleanup()

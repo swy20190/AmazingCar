@@ -12,7 +12,7 @@ PWMB = 23
 BIN1 = 25
 BIN2 = 24
 
-max_velocity = 114.514  # 具体数据待测
+max_velocity = 150  # 具体数据待测
 
 
 def init():

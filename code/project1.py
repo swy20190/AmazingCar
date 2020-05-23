@@ -68,7 +68,7 @@ def turn(l_speed, r_speed, duration, l_m, r_m):
 
     r_m.ChangeDutyCycle(r_speed)
     GPIO.output(BIN2, False)
-    GPIO.output(BIN2, True)
+    GPIO.output(BIN1, True)
 
     time.sleep(duration)
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     R_Motor.start(0)
     # forward 1 meter
     # R = 65mm
-    time_ward = 990.0/(90 / 48 * pi * 65)  # 由于惯性提前刹车，48是齿轮减速比
+    time_ward = 1.0  # 990.0/(90 / 48 * pi * 65)  # 由于惯性提前刹车，48是齿轮减速比
     forward(speed=90, duration=time_ward, l_m=L_Motor, r_m=R_Motor)
     # 1st brake
     brake(2.0, L_Motor, R_Motor)
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     brake(2.0, L_Motor, R_Motor)
     # turn left by 135 degree
     # speed of car
-    turning_time = 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
+    turning_time = 1.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
     advanced_turn(direction=0, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
     # 3rd brake
     brake(2.0, L_Motor, R_Motor)

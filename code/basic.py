@@ -66,7 +66,7 @@ def turn(l_speed, r_speed, duration, l_m, r_m):
 
     r_m.ChangeDutyCycle(r_speed)
     GPIO.output(BIN2, False)
-    GPIO.output(BIN2, True)
+    GPIO.output(BIN1, True)
 
     time.sleep(duration)
 
