@@ -12,14 +12,16 @@ PWMB = 23
 BIN1 = 25
 BIN2 = 24
 
-max_velocity = 150  # 具体数据待测
+max_velocity = 122  # 具体数据待测
 
 
 def init():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
+    GPIO.setup(PWMA, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)
@@ -68,7 +70,7 @@ if __name__ == '__main__':
     L_Motor.start(0)
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
-    forward_time = 10000 / max_velocity
+    forward_time = 1000.0 / max_velocity
     forward(100.0, forward_time, L_Motor, R_Motor)
     brake(0.05, L_Motor, R_Motor)
     backward(95, 0.01, L_Motor, R_Motor)

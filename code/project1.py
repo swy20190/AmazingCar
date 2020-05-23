@@ -19,7 +19,7 @@ def init():
 
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
-    GPIO.setup(PWMB, GPIO.OUT)
+    GPIO.setup(PWMA, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)
@@ -97,7 +97,7 @@ if __name__ == '__main__':
     R_Motor.start(0)
     # forward 1 meter
     # R = 65mm
-    time_ward = 1.0  # 990.0/(90 / 48 * pi * 65)  # 由于惯性提前刹车，48是齿轮减速比
+    time_ward = 100.0 / 122.0  # 990.0/(90 / 48 * pi * 65)  # 由于惯性提前刹车，48是齿轮减速比
     forward(speed=90, duration=time_ward, l_m=L_Motor, r_m=R_Motor)
     # 1st brake
     brake(2.0, L_Motor, R_Motor)
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     brake(2.0, L_Motor, R_Motor)
     # turn left by 135 degree
     # speed of car
-    turning_time = 0.5  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
+    turning_time = 75 * pi / 122.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
     advanced_turn(direction=0, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
     # 3rd brake
     brake(2.0, L_Motor, R_Motor)
