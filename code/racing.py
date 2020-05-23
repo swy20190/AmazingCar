@@ -40,6 +40,13 @@ def forward(speed, duration, l_m, r_m):
     time.sleep(duration)
 
 
+# 稍微向左调整，修正轮子的误差（真坑
+def short_left(l_m, r_m):
+    l_m.ChangeDutyCycle(0)
+    r_m.ChangeDutyCycle(100)
+    time.sleep(0.1)
+
+
 def backward(speed, duration, l_m, r_m):
     l_m.ChangeDutyCycle(speed)
     GPIO.output(AIN2, True)
@@ -70,9 +77,12 @@ if __name__ == '__main__':
     L_Motor.start(0)
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
-    forward_time = 1000.0 / max_velocity
+    forward_time = 330.0 / max_velocity
+    forward(100.0, forward_time, L_Motor, R_Motor)
+    short_left(L_Motor, R_Motor)
     forward(100.0, forward_time, L_Motor, R_Motor)
     brake(0.05, L_Motor, R_Motor)
+
     backward(95, 0.01, L_Motor, R_Motor)
     GPIO.cleanup()
 

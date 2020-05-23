@@ -75,12 +75,12 @@ def turn(l_speed, r_speed, duration, l_m, r_m):
     time.sleep(duration)
 
 
-# 半径为1米的转向
+# 半径为0.3米的转向
 def advanced_turn(direction, duration, l_m, r_m):
     # 外侧轮转速
-    faster_speed = 94.102
+    faster_speed = 57.47
     # 内侧轮转速
-    slower_speed = 80.0
+    slower_speed = 100
     # 0为向左，1为向右
     if direction == 0:
         turn(l_speed=slower_speed, r_speed=faster_speed, duration=duration, l_m=l_m, r_m=r_m)
@@ -98,16 +98,16 @@ if __name__ == '__main__':
     # forward 1 meter
     # R = 65mm
     time_ward = 100.0 / 122.0  # 990.0/(90 / 48 * pi * 65)  # 由于惯性提前刹车，48是齿轮减速比
-    forward(speed=90, duration=time_ward, l_m=L_Motor, r_m=R_Motor)
+    forward(speed=100, duration=time_ward, l_m=L_Motor, r_m=R_Motor)
     # 1st brake
     brake(2.0, L_Motor, R_Motor)
     # backward 1 meter
-    backward(90, time_ward, L_Motor, R_Motor)
+    backward(100, time_ward, L_Motor, R_Motor)
     # 2nd brake
     brake(2.0, L_Motor, R_Motor)
     # turn left by 135 degree
     # speed of car
-    turning_time = 75 * pi / 122.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
+    turning_time = 3 * 30.0 * pi / 122.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
     advanced_turn(direction=0, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
     # 3rd brake
     brake(2.0, L_Motor, R_Motor)
