@@ -14,8 +14,10 @@ BIN2 = 24
 def init():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
+    GPIO.setup(PWMB, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)

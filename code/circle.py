@@ -85,7 +85,7 @@ def pivot_turn(direction, l_m, r_m, forward):
     faster_speed = 80
     slower_speed = 0.0
     if direction == 0:
-        turn(l_speed=slower_speed, r_speed=faster_speed,duration=pivot_time, l_m=l_m, r_m=r_m, forward=forward)
+        turn(l_speed=slower_speed, r_speed=faster_speed, duration=pivot_time, l_m=l_m, r_m=r_m, forward=forward)
     else:
         turn(l_speed=faster_speed, r_speed=slower_speed, duration=pivot_time, l_m=l_m, r_m=r_m, forward=forward)
 
