@@ -19,8 +19,10 @@ echo = 21
 def init():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+
     GPIO.setup(AIN2, GPIO.OUT)
     GPIO.setup(AIN1, GPIO.OUT)
+    GPIO.setup(PWMA, GPIO.OUT)
 
     GPIO.setup(BIN1, GPIO.OUT)
     GPIO.setup(BIN2, GPIO.OUT)
@@ -28,6 +30,18 @@ def init():
 
     GPIO.setup(trigger, GPIO.OUT, GPIO.LOW)
     GPIO.setup(echo, GPIO.IN)
+
+
+def brake(duration, l_m, r_m):
+    l_m.ChangeDutyCycle(0)
+    GPIO.output(AIN2, False)
+    GPIO.output(AIN1, False)
+
+    r_m.ChangeDutyCycle(0)
+    GPIO.output(BIN2, False)
+    GPIO.output(BIN1, False)
+
+    time.sleep(duration)
 
 
 def measure():
@@ -70,9 +84,9 @@ def turn(l_speed, r_speed, duration, l_m, r_m, forward):
 # 半径为1米的转向
 def advanced_turn(direction, duration, l_m, r_m, forward):
     # 外侧轮转速
-    faster_speed = 94.102
+    faster_speed = 47.051
     # 内侧轮转速
-    slower_speed = 80.0
+    slower_speed = 40.0
     # 0为向左，1为向右
     if direction == 0:
         turn(l_speed=slower_speed, r_speed=faster_speed, duration=duration, l_m=l_m, r_m=r_m, forward=forward)
@@ -98,3 +112,13 @@ if __name__ == '__main__':
     R_Motor.start(0)
     # 首先原地右转90度
     pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=True)
+    arc_cnt = 0  # 记录走过多少个弧
+    arc_duration = 10 / 60  # 一段弧走多长时间
+    while True:
+        advanced_turn(direction=0, duration=arc_duration, l_m=L_Motor, r_m=R_Motor, forward=True)
+        brake(0.02, L_Motor, R_Motor)
+        distance = measure()
+        if distance > 0.1:
+            arc_cnt += 1
+        else:
+            brake(0.1)

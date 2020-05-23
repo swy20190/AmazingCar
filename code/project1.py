@@ -75,12 +75,12 @@ def turn(l_speed, r_speed, duration, l_m, r_m):
     time.sleep(duration)
 
 
-# 半径为0.3米的转向
+# 半径为0.1米的转向
 def advanced_turn(direction, duration, l_m, r_m):
     # 外侧轮转速
-    faster_speed = 57.47
+    faster_speed = 100
     # 内侧轮转速
-    slower_speed = 100
+    slower_speed = 10.5
     # 0为向左，1为向右
     if direction == 0:
         turn(l_speed=slower_speed, r_speed=faster_speed, duration=duration, l_m=l_m, r_m=r_m)
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     brake(2.0, L_Motor, R_Motor)
     # turn left by 135 degree
     # speed of car
-    turning_time = 3 * 30.0 * pi / 122.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
+    turning_time = 25.0 * pi / 122.0  # 0.75 * 1000 / (87.006 / 48 * 65)  # 不到7秒
     advanced_turn(direction=0, duration=turning_time, l_m=L_Motor, r_m=R_Motor)
     # 3rd brake
     brake(2.0, L_Motor, R_Motor)
