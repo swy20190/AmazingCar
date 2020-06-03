@@ -44,7 +44,7 @@ def forward(speed, duration, l_m, r_m):
 def short_left(l_m, r_m):
     l_m.ChangeDutyCycle(0)
     r_m.ChangeDutyCycle(100)
-    time.sleep(0.14)
+    time.sleep(0.2)
 
 
 def backward(speed, duration, l_m, r_m):
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     L_Motor.start(0)
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
-    forward_time = 330.0 / max_velocity
+    forward_time = 260 / max_velocity
     forward(100.0, forward_time, L_Motor, R_Motor)
     short_left(L_Motor, R_Motor)
     forward(100.0, forward_time, L_Motor, R_Motor)

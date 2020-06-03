@@ -81,10 +81,22 @@ def turn(l_speed, r_speed, duration, l_m, r_m, forward):
     time.sleep(duration)
 
 
+def backward(speed, duration, l_m, r_m):
+    l_m.ChangeDutyCycle(speed)
+    GPIO.output(AIN2, True)
+    GPIO.output(AIN1, False)
+
+    r_m.ChangeDutyCycle(speed)
+    GPIO.output(BIN2, True)
+    GPIO.output(BIN1, False)
+
+    time.sleep(duration)
+
+
 # 半径为1米的转向
 def advanced_turn(direction, duration, l_m, r_m, forward):
     # 外侧轮转速
-    faster_speed = 47.051
+    faster_speed = 42.0
     # 内侧轮转速
     slower_speed = 20.0
     # 0为向左，1为向右
@@ -104,6 +116,25 @@ def pivot_turn(direction, l_m, r_m, forward):
         turn(l_speed=faster_speed, r_speed=slower_speed, duration=pivot_time, l_m=l_m, r_m=r_m, forward=forward)
 
 
+def point_turn(direction, l_m, r_m):
+    point_time = 0.35
+    speed = 80
+    l_m.ChangeDutyCycle(speed)
+    r_m.ChangeDutyCycle(speed)
+    if direction == 0:
+        GPIO.output(AIN2, True)
+        GPIO.output(AIN1, False)
+        GPIO.output(BIN2, False)
+        GPIO.output(BIN1, True)
+    else:
+        GPIO.output(AIN2, False)
+        GPIO.output(AIN1, True)
+        GPIO.output(BIN2, True)
+        GPIO.output(BIN1, False)
+
+    time.sleep(point_time)
+
+
 if __name__ == '__main__':
     init()
     L_Motor = GPIO.PWM(PWMA, 100)
@@ -111,7 +142,8 @@ if __name__ == '__main__':
     R_Motor = GPIO.PWM(PWMB, 100)
     R_Motor.start(0)
     # 首先原地右转90度
-    pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=True)
+    # pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=True)
+    point_turn(direction=1, l_m=L_Motor, r_m=R_Motor)
     arc_cnt = 0  # 记录走过多少个弧
     arc_duration = 10.0 / 34  # 一段弧走多长时间
     while True:
@@ -124,8 +156,11 @@ if __name__ == '__main__':
             brake(1.0, L_Motor, R_Motor)
             break
     # 倒车
+
     advanced_turn(direction=0, duration=arc_cnt * arc_duration, l_m=L_Motor, r_m=R_Motor, forward=False)
     brake(0.5, L_Motor, R_Motor)
-    pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=False)
+    # pivot_turn(direction=1, l_m=L_Motor, r_m=R_Motor, forward=False)
+    point_turn(direction=0, l_m=L_Motor, r_m=R_Motor)
+    backward(speed=25, duration=1, l_m=L_Motor, r_m=R_Motor)
     brake(0.5, L_Motor, R_Motor)
     GPIO.cleanup()
